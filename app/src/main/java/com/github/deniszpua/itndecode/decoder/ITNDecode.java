@@ -8,9 +8,23 @@ import java.util.Calendar;
 public interface ITNDecode {
     public enum Sex {MALE, FEMALE}
 
-    public boolean isCorrectString(String string);
-    public ITNDecode getInstance(String string);
+    /**
+     *
+     * @return true, if string,used while creating object instance,
+     *         represents valid individual tax number
+     */
+    public boolean isValid();
+
+    /**
+     *
+     * @return Calendar object containing birthday data
+     */
     public Calendar getBirthday();
     public Sex getSex();
+
+    /**
+     *
+     * @return int in range from 0 to 9, that calculated from first nine symbols
+     */
     public int getControlDigitValue();
 }
