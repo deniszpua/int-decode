@@ -4,10 +4,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class DecodeActivity extends ActionBarActivity {
 
+    private void verifyInput() {
+        //TODO check input number for correctness and
+        //show appropriate message after editing field
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,5 +40,9 @@ public class DecodeActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void displayDecodeResult(View view) {
+        //TODO
     }
 }
