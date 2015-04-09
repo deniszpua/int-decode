@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="com.githhub.deniszpua.itndecode.MESSAGE_LINES_NUMBER">5</integer>
+    <integer name="decodeMessage_lines_number">5</integer>
 </resources>

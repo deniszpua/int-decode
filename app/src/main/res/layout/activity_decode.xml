@@ -29,7 +29,7 @@
         android:text="@string/enter_code"
         android:id="@+id/decodeMessage"
         android:gravity="center_horizontal"
-        android:lines="@integer/com.githhub.deniszpua.itndecode.MESSAGE_LINES_NUMBER"
+        android:lines="@integer/decodeMessage_lines_number"
         android:textSize="@dimen/numberInput_text_size" />
 
     <Button
