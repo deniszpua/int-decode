@@ -6,6 +6,7 @@ import java.util.Calendar;
  * Created by deniszpua on 09.04.15.
  */
 public interface ITNDecode {
+    public static int UNKNOWN = -1;
     public enum Sex {MALE, FEMALE}
 
     /**

@@ -33,8 +33,10 @@ public class ITNDecoder implements ITNDecode {
     public ITNDecoder(String string) {
         this.digits = toIntegerArray(string);
         isValidNumber = validString(string);
+
         if (isValidNumber) {
             controlDigit = computeControlDigit(string);
+
             //Even ninth digit for male and odd for females
             sex = ((digits[SEX_DIGIT_POSITION] % 2 == 0) ? Sex.FEMALE: Sex.MALE);
             //First five digits is birthday offset from 01.01.1900 in days
@@ -45,7 +47,7 @@ public class ITNDecoder implements ITNDecode {
             birthday.add(Calendar.DAY_OF_MONTH, birthdayOffset - 1);
         }
         else {
-            controlDigit = -1;
+            controlDigit = (isTenDigitNumber(string) ? computeControlDigit(string) : -1);
             sex = null;
             birthday = null;
         }
@@ -68,23 +70,25 @@ public class ITNDecoder implements ITNDecode {
         return controlDigit;
     }
 
-    //Constants, used to validate number
+    protected static boolean validString(String string) {
+        //string format verification
+        if (!isTenDigitNumber(string)) return false;
+
+        //control digit verification
+        int controlDigit = computeControlDigit(string);
+        return controlDigit ==
+                Character.getNumericValue(string.toCharArray()[CONTROL_DIGIT_POSITION]);
+    }
+
     public static final int NUMBER_OF_DIGITS = 10;
 
-    protected static boolean validString(String string) {
+    private static boolean isTenDigitNumber(String string) {
         //not ten digits number
         if (string.length() != NUMBER_OF_DIGITS) return false;
         for (char c : string.toCharArray()) {
             if (!Character.isDigit(c)) return false;
         }
-
-        //control digit verification
-
-        int[] digits = toIntegerArray(string);
-        int controlDigit = computeControlDigit(string);
-
-        return controlDigit == digits[CONTROL_DIGIT_POSITION];
-
+        return true;
     }
 
     private static int[] toIntegerArray(String string) {

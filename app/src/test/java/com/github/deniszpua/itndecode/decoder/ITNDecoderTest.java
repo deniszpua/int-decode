@@ -31,7 +31,6 @@ public class ITNDecoderTest {
         Assert.assertEquals(true, female_code.isValid());
         Assert.assertEquals(false, invalid_code.isValid());
         Assert.assertEquals(false, short_code.isValid());
-
     }
 
     @Test
@@ -39,12 +38,12 @@ public class ITNDecoderTest {
         Assert.assertEquals(5, male_code.getControlDigitValue());
         Assert.assertEquals(3, female_code.getControlDigitValue());
         Assert.assertEquals(6, invalid_code.getControlDigitValue());
+        Assert.assertEquals(ITNDecode.UNKNOWN, short_code.getControlDigitValue());
     }
 
     @Test
     public void testGetSex() throws Exception {
         Assert.assertEquals(ITNDecode.Sex.MALE, male_code.getSex());
         Assert.assertEquals(ITNDecode.Sex.FEMALE, female_code.getSex());
-
     }
 }
