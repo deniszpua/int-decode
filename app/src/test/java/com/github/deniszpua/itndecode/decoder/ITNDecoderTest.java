@@ -6,8 +6,8 @@ import org.junit.Test;
 
 
 public class ITNDecoderTest {
-    private static final String MALE_ITN_STRING = "2955210070";
-    private static final String FEMALE_ITN_STRING = "3039315785";
+    private static final String MALE_ITN_STRING = "2955210055";
+    private static final String FEMALE_ITN_STRING = "3039315783";
     private static final String INVALID_ITN_STRING = "1234567890";
     private static final String SHORT_ITN_STRING = "1234567";
 
@@ -36,13 +36,15 @@ public class ITNDecoderTest {
 
     @Test
     public void testGetControlDigitValue() throws Exception {
-        Assert.assertEquals(0, male_code.getControlDigitValue());
-        Assert.assertEquals(5, female_code.getControlDigitValue());
-        Assert.assertEquals(9, invalid_code.getControlDigitValue());
+        Assert.assertEquals(5, male_code.getControlDigitValue());
+        Assert.assertEquals(3, female_code.getControlDigitValue());
+        Assert.assertEquals(6, invalid_code.getControlDigitValue());
     }
 
     @Test
     public void testGetSex() throws Exception {
+        Assert.assertEquals(ITNDecode.Sex.MALE, male_code.getSex());
+        Assert.assertEquals(ITNDecode.Sex.FEMALE, female_code.getSex());
 
     }
 }
