@@ -80,7 +80,7 @@ public class ITNDecoder implements ITNDecode {
                 Character.getNumericValue(string.toCharArray()[CONTROL_DIGIT_POSITION]);
     }
 
-    public static final int NUMBER_OF_DIGITS = 10;
+    private static final int NUMBER_OF_DIGITS = 10;
 
     private static boolean isTenDigitNumber(String string) {
         //not ten digits number
@@ -101,8 +101,8 @@ public class ITNDecoder implements ITNDecode {
 
     private static final int[] VALIDATION_COEFFICIENTS =
             {-1, 5, 7, 9, 4, 6, 10, 5, 7};
-    public static final int CONTROL_DIGIT_BASE = 11;
-    public static final int CONTROL_DIGIT_DIVISOR = 10;
+    private static final int CONTROL_DIGIT_BASE = 11;
+    private static final int CONTROL_DIGIT_DIVISOR = 10;
 
     private static int computeControlDigit(String string) {
         int[] digits = toIntegerArray(string);

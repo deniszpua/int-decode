@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Calendar;
+
 
 public class ITNDecoderTest {
     private static final String MALE_ITN_STRING = "2955210055";
@@ -45,5 +47,18 @@ public class ITNDecoderTest {
     public void testGetSex() throws Exception {
         Assert.assertEquals(ITNDecode.Sex.MALE, male_code.getSex());
         Assert.assertEquals(ITNDecode.Sex.FEMALE, female_code.getSex());
+    }
+
+    @Test
+    public void testGetBirthday() throws Exception {
+        Calendar expected = Calendar.getInstance();
+        expected.clear();
+        expected.set(1980, Calendar.NOVEMBER, 28);
+        Assert.assertEquals(expected, male_code.getBirthday());
+        expected.set(1983, Calendar.MARCH, 19);
+        Assert.assertEquals(expected, female_code.getBirthday());
+        Assert.assertEquals(null, invalid_code.getBirthday());
+        Assert.assertEquals(null, short_code.getBirthday());
+
     }
 }

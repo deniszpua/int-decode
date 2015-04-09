@@ -21,6 +21,8 @@ public interface ITNDecode {
      * @return Calendar object containing birthday data
      */
     public Calendar getBirthday();
+
+
     public Sex getSex();
 
     /**
