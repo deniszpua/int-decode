@@ -9,4 +9,7 @@
     <string name="checkControlDigit">"Please check your input\n Control symbol value is %1$d"</string>
     <string name="incorrectNumberFormat">Valid number must contain ten digits</string>
     <string name="itn_data_message">"Date of birth is %1$tm.%1$td.%1$tY\nDetected sex: %2$s"</string>
+    <string name="title_activity_about">About</string>
+
+    <string name="about">Simple app for quux at ukr dot net developer portfolio</string>
 </resources>

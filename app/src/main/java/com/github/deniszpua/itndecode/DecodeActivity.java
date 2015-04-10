@@ -1,5 +1,6 @@
 package com.github.deniszpua.itndecode;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -41,8 +42,8 @@ public class DecodeActivity extends ActionBarActivity {
             }
         });
     }
+    /**Helper method to adjust textView caption to input result*/
     private void verifyInput(String input) {
-        //TODO check input number for correctness and
         //show appropriate message after editing field
         System.out.printf("Input string: %s%n", input);
 
@@ -59,6 +60,23 @@ public class DecodeActivity extends ActionBarActivity {
         }
     }
 
+    /**Called when user clicks button */
+    public void displayDecodeResult(View view) {
+        String input = editText.getText().toString();
+        ITNDecode itn = new ITNDecoder(input);
+        if (itn.isValid()) {
+            textView.setText(
+                    String.format(
+                            getString(R.string.itn_data_message),
+                            itn.getBirthday(),
+                            itn.getSex()
+                    )
+            );
+        }
+        else {
+            verifyInput(input);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,26 +94,11 @@ public class DecodeActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void displayDecodeResult(View view) {
-        String input = editText.getText().toString();
-        ITNDecode itn = new ITNDecoder(input);
-        if (itn.isValid()) {
-            textView.setText(
-                    String.format(
-                            getString(R.string.itn_data_message),
-                            itn.getBirthday(),
-                            itn.getSex()
-                    )
-            );
-        }
-        else {
-            verifyInput(input);
-        }
     }
 }
