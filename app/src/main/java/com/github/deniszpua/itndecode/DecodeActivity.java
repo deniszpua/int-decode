@@ -49,7 +49,7 @@ public class DecodeActivity extends ActionBarActivity {
 
         ITNDecode itn = new ITNDecoder(input);
         if (itn.isValid()) {
-            textView.setText(R.string.correctStringMessage);
+            displayDecodingResult(itn);
         }
         else if (itn.getControlDigitValue() != ITNDecode.UNKNOWN) {
             String checkMessage = getString(R.string.checkControlDigit);
@@ -61,21 +61,25 @@ public class DecodeActivity extends ActionBarActivity {
     }
 
     /**Called when user clicks button */
-    public void displayDecodeResult(View view) {
+    public void onButtonPressed(View view) {
         String input = editText.getText().toString();
         ITNDecode itn = new ITNDecoder(input);
         if (itn.isValid()) {
-            textView.setText(
-                    String.format(
-                            getString(R.string.itn_data_message),
-                            itn.getBirthday(),
-                            itn.getSex()
-                    )
-            );
+            displayDecodingResult(itn);
         }
         else {
             verifyInput(input);
         }
+    }
+
+    private void displayDecodingResult(ITNDecode itn) {
+        textView.setText(
+                String.format(
+                        getString(R.string.itn_data_message),
+                        itn.getBirthday(),
+                        itn.getSex()
+                )
+        );
     }
 
     @Override
