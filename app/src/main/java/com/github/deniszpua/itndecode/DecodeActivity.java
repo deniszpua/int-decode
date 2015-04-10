@@ -16,14 +16,19 @@ import com.github.deniszpua.itndecode.decoder.ITNDecoder;
 
 
 public class DecodeActivity extends ActionBarActivity {
+    private EditText editText;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decode);
 
+        //initialize fields
+        editText = (EditText) findViewById(R.id.numberInput);
+        textView = (TextView) findViewById(R.id.decodeMessage);
+
         //registering editText action listener
-        final EditText editText = (EditText) findViewById(R.id.numberInput);
         editText.setOnEditorActionListener(new OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -41,17 +46,16 @@ public class DecodeActivity extends ActionBarActivity {
         //show appropriate message after editing field
         System.out.printf("Input string: %s%n", input);
 
-        TextView message = (TextView) findViewById(R.id.decodeMessage);
         ITNDecode itn = new ITNDecoder(input);
         if (itn.isValid()) {
-            message.setText(R.string.correctStringMessage);
+            textView.setText(R.string.correctStringMessage);
         }
         else if (itn.getControlDigitValue() != ITNDecode.UNKNOWN) {
             String checkMessage = getString(R.string.checkControlDigit);
-            message.setText(String.format(checkMessage, itn.getControlDigitValue()));
+            textView.setText(String.format(checkMessage, itn.getControlDigitValue()));
         }
         else {
-            message.setText(R.string.incorrectNumberFormat);
+            textView.setText(R.string.incorrectNumberFormat);
         }
     }
 
@@ -79,6 +83,19 @@ public class DecodeActivity extends ActionBarActivity {
     }
 
     public void displayDecodeResult(View view) {
-        //TODO
+        String input = editText.getText().toString();
+        ITNDecode itn = new ITNDecoder(input);
+        if (itn.isValid()) {
+            textView.setText(
+                    String.format(
+                            getString(R.string.itn_data_message),
+                            itn.getBirthday(),
+                            itn.getSex()
+                    )
+            );
+        }
+        else {
+            verifyInput(input);
+        }
     }
 }
