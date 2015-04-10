@@ -8,7 +8,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".DecodeActivity"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="#ffdcebff"
+    android:weightSum="1">
 
     <EditText
         android:layout_width="wrap_content"
@@ -25,7 +27,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="132dp"
         android:text="@string/enter_code"
         android:id="@+id/decodeMessage"
         android:gravity="center_horizontal"
@@ -33,9 +35,12 @@
         android:textSize="@dimen/numberInput_text_size" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="145dp"
+        android:layout_height="52dp"
         android:text="@string/button_decode"
-        android:onClick="displayDecodeResult" />
+        android:onClick="displayDecodeResult"
+        android:background="@drawable/button_custom"
+        android:layout_weight="0.04"
+        android:textColor="#ffffffff" />
 
 </LinearLayout>
